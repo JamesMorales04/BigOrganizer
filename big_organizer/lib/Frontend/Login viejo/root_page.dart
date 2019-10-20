@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:big_organizer/Frontend/login_signup_page.dart';
-import 'package:big_organizer/Backend/Autenticacion/BaseAuth.dart';
-import 'package:big_organizer/Frontend/home_page.dart';
+import 'package:big_organizer/Frontend/Login viejo/home_page.dart';
+import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
+import 'package:big_organizer/Frontend/Login viejo/login_signup_page.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,

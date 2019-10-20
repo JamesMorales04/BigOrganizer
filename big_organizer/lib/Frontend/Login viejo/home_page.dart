@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:big_organizer/Backend/Autenticacion/BaseAuth.dart';
+import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:big_organizer/Backend/Tablas/todo.dart';
 import 'dart:async';
@@ -28,13 +28,11 @@ class _HomePageState extends State<HomePage> {
 
   Query _todoQuery;
 
-  //bool _isEmailVerified = false;
 
   @override
   void initState() {
     super.initState();
 
-    //_checkEmailVerification();
 
     _todoList = new List();
     _todoQuery = _database
@@ -46,67 +44,6 @@ class _HomePageState extends State<HomePage> {
     _onTodoChangedSubscription =
         _todoQuery.onChildChanged.listen(onEntryChanged);
   }
-
-//  void _checkEmailVerification() async {
-//    _isEmailVerified = await widget.auth.isEmailVerified();
-//    if (!_isEmailVerified) {
-//      _showVerifyEmailDialog();
-//    }
-//  }
-
-//  void _resentVerifyEmail(){
-//    widget.auth.sendEmailVerification();
-//    _showVerifyEmailSentDialog();
-//  }
-
-//  void _showVerifyEmailDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content: new Text("Please verify account in the link sent to email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Resent link"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//                _resentVerifyEmail();
-//              },
-//            ),
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
-
-//  void _showVerifyEmailSentDialog() {
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title: new Text("Verify your account"),
-//          content: new Text("Link to verify account has been sent to your email"),
-//          actions: <Widget>[
-//            new FlatButton(
-//              child: new Text("Dismiss"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-//  }
 
   @override
   void dispose() {
@@ -149,7 +86,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   updateTodo(Todo todo) {
-    //Toggle completed
     todo.completed = !todo.completed;
     if (todo != null) {
       _database.reference().child("todo").child(todo.key).set(todo.toJson());
@@ -238,7 +174,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Center(
           child: Text(
-        "Welcome. Your list is empty",
+        "Bienvenido",
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 30.0),
       ));
@@ -249,10 +185,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('Flutter login demo'),
+          title: new Text('Big Organizer'),
           actions: <Widget>[
             new FlatButton(
-                child: new Text('Logout',
+                child: new Text('Salir',
                     style: new TextStyle(fontSize: 17.0, color: Colors.white)),
                 onPressed: signOut)
           ],
