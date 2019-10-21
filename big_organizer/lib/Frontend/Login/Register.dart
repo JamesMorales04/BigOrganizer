@@ -20,11 +20,13 @@ class _RegisterState extends State<Register> {
   String _nombre;
   String _correo;
   String _contrasena;
+  String _fecha = "Ingresa una fecha de nacimiento";
   DateTime _fecha_de_nacimiento;
   String _genero;
   Country _pais;
   String _confirmar;
   List<String> _generos = ['Masculino', 'Femenino', 'Helicopter'];
+  String _errores = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class _RegisterState extends State<Register> {
         _entrys(),
         _country(),
         _genere(),
+        _age(),
         Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,7 +87,7 @@ class _RegisterState extends State<Register> {
       child: new TextFormField(
         autofocus: false,
         decoration: new InputDecoration(hintText: 'Nombre completo'),
-        validator: (value) => value.isEmpty ? 'Ingresa un nombre valido' : null,
+        validator: (value) => value.isEmpty ? 'Ingresa un nombre' : null,
         onSaved: (value) => _nombre = value.trim(),
       ),
     );
@@ -93,21 +96,29 @@ class _RegisterState extends State<Register> {
   Widget _age() {
     return new Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: new FlatButton(
-            onPressed: () {
-              DatePicker.showDatePicker(context,
-                  showTitleActions: true,
-                  minTime: DateTime(2018, 3, 5),
-                  maxTime: DateTime(2019, 6, 7), onChanged: (date) {
-                print('change $date');
-              }, onConfirm: (date) {
-                print('confirm $date');
-              }, currentTime: DateTime.now(), locale: LocaleType.zh);
-            },
-            child: Text(
-              'show date time picker (Chinese)',
-              style: TextStyle(color: Colors.blue),
-            )));
+        child: new RaisedButton(
+          onPressed: () {
+            DatePicker.showDatePicker(context,
+                showTitleActions: true,
+                minTime: DateTime(1900, 1, 1),
+                maxTime: DateTime.now(), onChanged: (date) {
+              setState(() {
+                _fecha = date.toString().split(" ")[0];
+                _fecha_de_nacimiento = date;
+              });
+            }, onConfirm: (date) {
+              setState(() {
+                _fecha = date.toString().split(" ")[0];
+                _fecha_de_nacimiento = date;
+              });
+            }, currentTime: DateTime.now(), locale: LocaleType.es);
+          },
+          child: Text(
+            _fecha,
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Color.fromARGB(255, 63, 169, 245),
+        ));
   }
 
   Widget _email() {
@@ -117,7 +128,12 @@ class _RegisterState extends State<Register> {
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
         decoration: new InputDecoration(hintText: 'Correo Electronico'),
-        validator: (value) => value.isEmpty ? 'Ingresa un correo valido' : null,
+        validator:(value) {
+          if(value.isEmpty){
+            return "El correo no pude estar vacio";
+          }
+          return null;
+        },
         onSaved: (value) => _correo = value.trim(),
       ),
     );
@@ -130,8 +146,15 @@ class _RegisterState extends State<Register> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(hintText: 'Contraseña'),
-        validator: (value) =>
-            value.isEmpty ? 'Ingresa una contraseña valida' : null,
+        validator:(value) {
+          if(value.isEmpty){
+            return "La contraseña no puede estar vacio";
+          }
+          if(value.length<6){
+            return "La contraseña debe tener almenos 6 caracteres";
+          }
+          return null;
+        },
         onSaved: (value) => _contrasena = value.trim(),
       ),
     );
@@ -146,10 +169,9 @@ class _RegisterState extends State<Register> {
         decoration: new InputDecoration(hintText: 'Confirmar Contraseña'),
         validator: (value) {
           if (value.isEmpty) {
-            return "Ingresa la misma contraseña ";
-          } else {
-            return null;
+            return "Debe tener 6 caracteres";
           }
+          return null;
         },
         onSaved: (value) => _confirmar = value.trim(),
       ),
@@ -194,7 +216,6 @@ class _RegisterState extends State<Register> {
         ));
   }
 
-
   Widget _registrar() {
     return new Container(
         padding: EdgeInsets.only(top: 30),
@@ -203,7 +224,7 @@ class _RegisterState extends State<Register> {
               "Registrar",
               style: TextStyle(color: Colors.white),
             ),
-            color: Colors.blue,
+            color: Color.fromARGB(255, 63, 169, 245),
             onPressed: _iniciar_sesion,
             shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0))));
@@ -217,7 +238,7 @@ class _RegisterState extends State<Register> {
               "Volver",
               style: TextStyle(color: Colors.white),
             ),
-            color: Colors.blue,
+            color: Color.fromARGB(255, 63, 169, 245),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -227,8 +248,29 @@ class _RegisterState extends State<Register> {
 
   bool _validar() {
     final form = _formKey.currentState;
-    if (form.validate() && _confirmar == _contrasena) {
+
+    if (form.validate()) {
       form.save();
+      if(_contrasena!=_confirmar){
+        _errores = "Ambas contraseñas no coinciden";
+        _error(context);
+        return false;
+      }
+      if (_genero == null) {
+        _errores = "Por favor ingresa un genero";
+        _error(context);
+        return false;
+      }
+      if (_fecha_de_nacimiento == null) {
+        _errores = "Por favor ingresa una fecha de nacimiento";
+        _error(context);
+        return false;
+      }
+      if (_pais == null) {
+        _errores = "Por favor ingresa un pais";
+        _error(context);
+        return false;
+      }
       return true;
     }
     return false;
@@ -249,6 +291,7 @@ class _RegisterState extends State<Register> {
         print('Signed in: $_id');
         _valido();
       } catch (e) {
+        _errores="Esta cuenta ya esta en uso";
         _error(context);
         print('jelouda');
       }
@@ -267,7 +310,7 @@ class _RegisterState extends State<Register> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text("El correo o la contraseña no son validos"),
+            content: new Text(_errores),
             actions: <Widget>[
               FlatButton(
                 child: const Text('Cerrar'),

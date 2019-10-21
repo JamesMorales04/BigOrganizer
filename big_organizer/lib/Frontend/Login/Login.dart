@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
             "Iniciar Sesion",
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.blue,
+          color: Color.fromARGB(255, 63, 169, 245),
           onPressed: _iniciar_sesion,
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ));
@@ -119,7 +119,7 @@ class _LoginState extends State<Login> {
             "Volver",
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.blue,
+          color: Color.fromARGB(255, 63, 169, 245),
           onPressed: () {
               Navigator.pop(context);
             },

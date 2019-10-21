@@ -16,14 +16,73 @@ class Inicio extends StatelessWidget {
         _titulo(),
         _login(context),
         _register(context),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[ 
+            _otros_inicios_texto(),
+            _otros_inicios_google(),
+            _otros_inicios_facebook()
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _lenguaje(),
+            _help()
+          ],
+        ),
         _company(context)
       ],
     ));
   }
 
+
+  
+
+  Widget _lenguaje() {
+    return new Container(
+      padding: EdgeInsets.only(top: 10),
+      child:Text("Lenguaje",)
+    );
+  }
+
+  Widget _help() {
+    return new FlatButton(
+      padding: EdgeInsets.only(top: 10),
+      child:Text("Help!",style: TextStyle(color: Colors.blue),)
+    );
+  }
+
+  Widget _otros_inicios_google() {
+    return new Container(
+      padding: EdgeInsets.only(top: 10),
+      child: IconButton(
+        icon: Image.asset('assets/icons/google.png'),
+        onPressed: (){},
+      ),
+    );
+  } 
+
+  Widget _otros_inicios_facebook() {
+    return new Container(
+      padding: EdgeInsets.only(top: 10),
+      child: IconButton(
+        icon: Image.asset('assets/icons/facebook.png'),
+        onPressed: (){},
+      ),
+    );
+  } 
+
+  Widget _otros_inicios_texto() {
+    return new Container(
+      padding: EdgeInsets.only(top: 10),
+      child: Text('O ingresa con'),
+    );
+  } 
+
   Widget _logo() {
     return new Container(
-      padding: EdgeInsets.only(top: 40),
+      padding: EdgeInsets.only(top: 70),
       child: Image.asset(
         'assets/icons/app_icon.png',
         height: 200,
@@ -38,7 +97,7 @@ class Inicio extends StatelessWidget {
         "Big Organizer",
         style: TextStyle(fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
-        textScaleFactor: 5,
+        textScaleFactor: 3,
       ),
     );
   }
@@ -51,7 +110,7 @@ class Inicio extends StatelessWidget {
             "Iniciar Sesion",
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.blue,
+          color: Color.fromARGB(255, 63, 169, 245),
           onPressed: () {
             Navigator.push(
               context,
@@ -70,7 +129,7 @@ class Inicio extends StatelessWidget {
             "Registrarse",
             style: TextStyle(color: Colors.white),
           ),
-          color: Colors.blue,
+          color: Color.fromARGB(255, 63, 169, 245),
           onPressed: () {
             Navigator.push(
               context,
