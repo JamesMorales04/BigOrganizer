@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 
-
 class Login extends StatefulWidget {
   Login({this.auth});
 
@@ -21,15 +20,15 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return new Scaffold(
         body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          children: <Widget>[
-            _titulo(),
-            _entrys(),
-            _restablecer(),
-            _iniciar(),
-            _volver()
-          ],
-        ));
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      children: <Widget>[
+        _titulo(),
+        _entrys(),
+        _restablecer(),
+        _iniciar(),
+        _volver()
+      ],
+    ));
   }
 
   Widget _entrys() {
@@ -47,7 +46,7 @@ class _LoginState extends State<Login> {
         ));
   }
 
-   Widget _titulo() {
+  Widget _titulo() {
     return new Container(
       padding: EdgeInsets.only(top: 70),
       child: Text(
@@ -57,7 +56,7 @@ class _LoginState extends State<Login> {
         textScaleFactor: 5,
       ),
     );
-  } 
+  }
 
   Widget _email() {
     return new Padding(
@@ -79,12 +78,12 @@ class _LoginState extends State<Login> {
           autofocus: false,
           obscureText: true,
           decoration: InputDecoration(hintText: "Contraseña"),
-          validator: (value) =>value.isEmpty ? 'La contraseña no puede ser vacia' : null,
+          validator: (value) =>
+              value.isEmpty ? 'La contraseña no puede ser vacia' : null,
           onSaved: (value) => _contrasena = value.trim(),
         ));
   }
 
-  
   Widget _restablecer() {
     return new Container(
         padding: EdgeInsets.only(top: 10),
@@ -106,7 +105,7 @@ class _LoginState extends State<Login> {
             style: TextStyle(color: Colors.white),
           ),
           color: Colors.blue,
-          onPressed:_iniciar_sesion,
+          onPressed: _iniciar_sesion,
         ));
   }
 
@@ -119,7 +118,9 @@ class _LoginState extends State<Login> {
             style: TextStyle(color: Colors.white),
           ),
           color: Colors.blue,
-          onPressed: () {},
+          onPressed: () {
+              Navigator.pop(context);
+            },
         ));
   }
 
@@ -133,7 +134,6 @@ class _LoginState extends State<Login> {
   }
 
   void _iniciar_sesion() async {
-
     if (_validar()) {
       print(_correo);
       print(_contrasena);
@@ -150,44 +150,37 @@ class _LoginState extends State<Login> {
 
   Widget _valido(BuildContext context) {
     showDialog<bool>(
-      context: context,
-      builder: (BuildContext context){
-        return AlertDialog(
-          content: const Text(
-            "Bienvenido, es valido prrrrrro"
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('Cerrar'),
-              onPressed: (){
-                Navigator.of(context).pop(true);
-              },
-            )
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: const Text("Bienvenido, es valido prrrrrro"),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('Cerrar'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+              )
+            ],
+          );
+        });
   }
+
   Widget _error(BuildContext context) {
     showDialog<bool>(
-      context: context,
-      builder: (BuildContext context){
-        return AlertDialog(
-          content: const Text(
-            "El correo o la contraseña no son validos"
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: const Text('Cerrar'),
-              onPressed: (){
-                Navigator.of(context).pop(true);
-              },
-            )
-          ],
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: const Text("El correo o la contraseña no son validos"),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('Cerrar'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+              )
+            ],
+          );
+        });
   }
-
-
 }
