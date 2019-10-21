@@ -15,7 +15,8 @@ class Inicio extends StatelessWidget {
         _logo(),
         _titulo(),
         _login(context),
-        _register(context)
+        _register(context),
+        _company(context)
       ],
     ));
   }
@@ -44,7 +45,7 @@ class Inicio extends StatelessWidget {
 
   Widget _login(BuildContext context) {
     return new Container(
-        padding: EdgeInsets.only(top: 70),
+        padding: EdgeInsets.only(top: 100),
         child: RaisedButton(
           child: Text(
             "Iniciar Sesion",
@@ -57,12 +58,13 @@ class Inicio extends StatelessWidget {
               MaterialPageRoute(builder: (context) => Login(auth: auth)),
             );
           },
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ));
   }
 
   Widget _register(BuildContext context) {
     return new Container(
-        padding: EdgeInsets.only(top: 30),
+        padding: EdgeInsets.only(top: 15),
         child: RaisedButton(
           child: Text(
             "Registrarse",
@@ -75,6 +77,15 @@ class Inicio extends StatelessWidget {
               MaterialPageRoute(builder: (context) => Register(auth: auth,)),
             );
           },
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ));
+  }
+
+  Widget _company(BuildContext context) {
+    return new Container(
+      alignment: Alignment.bottomCenter,
+      padding:EdgeInsets.only(top: 150),
+        child: Text("Hestia Development")
+        );
   }
 }

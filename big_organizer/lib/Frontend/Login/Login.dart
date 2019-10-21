@@ -1,3 +1,4 @@
+import 'package:big_organizer/Frontend/Menu/Menu.dart';
 import 'package:flutter/material.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 
@@ -106,6 +107,7 @@ class _LoginState extends State<Login> {
           ),
           color: Colors.blue,
           onPressed: _iniciar_sesion,
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ));
   }
 
@@ -121,6 +123,7 @@ class _LoginState extends State<Login> {
           onPressed: () {
               Navigator.pop(context);
             },
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ));
   }
 
@@ -140,7 +143,7 @@ class _LoginState extends State<Login> {
       try {
         String _id = await widget.auth.signIn(_correo, _contrasena);
         print('Signed in: $_id');
-        _valido(context);
+        _valido();
       } catch (e) {
         _error(context);
         print('jelouda');
@@ -148,22 +151,11 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Widget _valido(BuildContext context) {
-    showDialog<bool>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: const Text("Bienvenido, es valido prrrrrro"),
-            actions: <Widget>[
-              FlatButton(
-                child: const Text('Cerrar'),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-              )
-            ],
-          );
-        });
+  void _valido() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Menu(auth: widget.auth)),
+    );
   }
 
   Widget _error(BuildContext context) {

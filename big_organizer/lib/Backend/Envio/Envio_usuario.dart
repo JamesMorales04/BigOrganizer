@@ -19,7 +19,7 @@ class Envio_usuario {
   }
 
   addNewTodo() {
-    Usuario user = new Usuario(userId,nombre,genero,false,0);
+    Usuario user = new Usuario(userId,nombre,genero,pais,false,0);
     _database.reference().child("Usuario").push().set(user.toJson());
   
   }
