@@ -111,7 +111,7 @@ class _MenuState extends State<Menu> {
 
   Widget _asistente(){
     return new ButtonTheme(
-      minWidth: 200.0,
+      minWidth: 150.0,
       height: 200.0,
       child: FlatButton.icon(
           color: Color.fromARGB(255, 63, 169, 245),

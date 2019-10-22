@@ -11,16 +11,9 @@ class Envio_usuario {
   String pais;
   Query _userQuery;
 
-  @override
-  void initState() {
-    
-    _userQuery = _database.reference().child("Usuario").orderByChild("userId").equalTo(userId);
-
-  }
-
   addNewTodo() {
-    Usuario user = new Usuario(userId,nombre,genero,pais,false,0);
-    _database.reference().child("Usuario").push().set(user.toJson());
+    Usuario user = new Usuario(nombre,genero,pais,false,0);
+    _database.reference().child("Usuario").child(userId).child("Informacion").set(user.toJson());
   
   }
 }

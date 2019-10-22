@@ -23,6 +23,12 @@ class Auth implements BaseAuth {
     return user;
   }
 
+   Future<String> getCurrentUserid() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    return user.uid;
+  }
+
+
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
