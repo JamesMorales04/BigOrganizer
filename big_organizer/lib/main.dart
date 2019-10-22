@@ -1,3 +1,4 @@
+import 'package:big_organizer/Frontend/Calendario/Calendario.dart';
 import 'package:big_organizer/Frontend/Login/Inicio.dart';
 import 'package:big_organizer/Frontend/Login/Login.dart';
 import 'package:big_organizer/Frontend/Login/Register.dart';
@@ -17,6 +18,6 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new Inicio(auth: new Auth()));
+        home: new Inicio(auth: new Auth(),));
   }
 }

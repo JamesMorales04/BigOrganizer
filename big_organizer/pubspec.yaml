@@ -27,6 +27,9 @@ dependencies:
   firebase_auth: ^0.14.0+5
   flutter_country_picker: ^0.1.4
   flutter_datetime_picker: ^1.2.8
+  table_calendar: ^2.1.0
+
+
 
 
 dev_dependencies:
