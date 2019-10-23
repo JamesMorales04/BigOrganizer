@@ -288,7 +288,7 @@ class _RegisterState extends State<Register> {
         print(_genero);
         print(_pais);
         Envio_usuario envio = new Envio_usuario(
-            userId: _id, nombre: _nombre, genero: _genero, pais: _pais.name);
+            userId: _id, nombre: _nombre, genero: _genero, pais: _pais.name, fecha_nacimiento: _fecha_de_nacimiento);
         envio.addNewTodo();
         print('Signed in: $_id');
         _valido();

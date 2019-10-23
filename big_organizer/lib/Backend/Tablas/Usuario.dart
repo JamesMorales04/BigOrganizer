@@ -5,17 +5,17 @@ class Usuario {
   String _genre;
   String _pais;
   bool _admin;
-  int _age;
+  DateTime _fecha_nacimiento;
 
   //Definicion de los metodos encargados de proveer los datos en los atributos de la base de datos
   String get name=>_name;
   String get genre=>_genre;
   String get pais=>_pais;
   bool get admin=>_admin;
-  int get age=>_age;
+  DateTime get fecha_nacimiento=>_fecha_nacimiento;
 
   //Constructor encargado de inicializarme los valores
-  Usuario(this._name,this._genre,this._pais,this._admin,this._age);
+  Usuario(this._name,this._genre,this._pais,this._admin,this._fecha_nacimiento);
 
   //Creaccion del json para el Query
   toJson() {
@@ -24,7 +24,7 @@ class Usuario {
       "genre": _genre,
       "admin": _admin,
       "pais": _pais,
-      "age": _age,
+      "fecha_nacimiento": _fecha_nacimiento,
     };
   }
 

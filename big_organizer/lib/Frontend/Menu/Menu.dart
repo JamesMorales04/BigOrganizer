@@ -20,15 +20,14 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
 
   Widget _activities(){
-    return new Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        ButtonTheme(
-          minWidth: 300.0,
-          height: 200.0,
+    return new Container(
+      padding: EdgeInsets.fromLTRB(10, 20, 10, 0), 
+      width: 370,
+      height: 200,
+        child: ButtonTheme(
           child: 
             FlatButton.icon(
-            color: Color.fromARGB(255, 63, 169, 245),
+            color: Color.fromARGB(255, 80, 113, 255),
             //icon: Icon(Icons.assessment, color: Colors.white, size: 80), //`Icon` to display
             icon: ImageIcon(AssetImage("assets/icons/activities_icon.png"), size: 50, color:Colors.white),
             label: Text('Actividades', style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
@@ -42,20 +41,18 @@ class _MenuState extends State<Menu> {
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
           ),
         ),
-      ],
     );
   }
 
   Widget _calendar(){
-    return new Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        ButtonTheme(
-          minWidth: 300.0,
-          height: 150.0,
+    return new Container(
+      padding: EdgeInsets.fromLTRB(10, 20, 10, 0), 
+      width: 370,
+      height: 200,
+      child: ButtonTheme(
           child: 
             FlatButton.icon(
-            color: Color.fromARGB(255, 63, 169, 245),
+            color: Color.fromARGB(255, 245, 63, 169),
             icon: ImageIcon(AssetImage("assets/icons/calendar_icon.png"), size: 50, color:Colors.white), //`Icon` to display
             label: Text('Calendario', style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
             onPressed: () {
@@ -68,14 +65,15 @@ class _MenuState extends State<Menu> {
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
           ),
         ),
-      ],
     );
   }
 
   Widget _tienda(){
-    return new ButtonTheme(
-      minWidth: 200.0,
-      height: 100.0,
+    return new Container(
+      padding: EdgeInsets.fromLTRB(20, 20, 10, 0), 
+      width: 200,
+      height:125,
+      child: ButtonTheme(
       child: FlatButton.icon(
           color: Color.fromARGB(255, 63, 169, 245),
           icon: ImageIcon(AssetImage("assets/icons/store_icon.png"), size: 50, color:Colors.white), //`Icon` to display
@@ -89,16 +87,17 @@ class _MenuState extends State<Menu> {
           },
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ),
-    );
+    ));
   }
 
   Widget _ajustes(){
-    return new ButtonTheme(
-      padding: EdgeInsets.only(top: 10),
-      minWidth: 200.0,
-      height: 100.0,
+    return new Container(
+      padding: EdgeInsets.fromLTRB(20, 20, 10, 0), 
+      width: 200,
+      height:125,
+      child: ButtonTheme(
       child: FlatButton.icon(
-          color: Color.fromARGB(255, 63, 169, 245),
+          color: Color.fromARGB(255, 50, 50, 50),
           icon: ImageIcon(AssetImage("assets/icons/settings_icon.png"), size: 50, color:Colors.white), //`Icon` to display
           label: Text('Ajustes', style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
@@ -110,15 +109,17 @@ class _MenuState extends State<Menu> {
           },
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
         ),
+    )
+    
     );
   }
 
   Widget _asistente(){
-    return new ButtonTheme(
-      minWidth: 150.0,
-      height: 200.0,
+    return new Container(
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      height: 250,
       child: FlatButton.icon(
-          color: Color.fromARGB(255, 63, 169, 245),
+          color: Color.fromARGB(255, 169, 63, 245),
           icon: ImageIcon(AssetImage("assets/icons/assistant_icon.png"), size: 50, color:Colors.white), //`Icon` to display
           label: Text('Asistente', style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
@@ -156,7 +157,7 @@ class _MenuState extends State<Menu> {
     String name=document['name'];
     return new Scaffold(
       appBar: new AppBar(
-          title: Text(name),
+          title: Text("Hola, ${name}!"),
           automaticallyImplyLeading: false),
       body: Center(
         child: 
