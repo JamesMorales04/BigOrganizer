@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
@@ -25,10 +24,20 @@ class _CalendarioState extends State<Calendario> {
           )
       ),
       body: Container(
-        child: Center(
-          child: _buildTableCalendar(),
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            children: <Widget>[
+              _buildTableCalendar(),
+
+              Divider(
+                height: 50,
+                color: Colors.grey,
+              ),
+
+              
+            ],
+          ),
         ),
-      ),
     );
   }
   Widget _buildTableCalendar() {

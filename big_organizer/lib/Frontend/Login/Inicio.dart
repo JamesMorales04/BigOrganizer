@@ -1,3 +1,4 @@
+import 'package:big_organizer/Backend/Envio/Envio_frases.dart';
 import 'package:big_organizer/Frontend/Login/Login.dart';
 import 'package:big_organizer/Frontend/Login/Register.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,9 @@ class Inicio extends StatelessWidget {
   final BaseAuth auth;
   @override
   Widget build(BuildContext context) {
+    Envio_frases envio = new Envio_frases(frases: "Un buen trabajo es una buena vida");
+    envio.addNewdfrase();
+    
     return new Scaffold(
         body: ListView(
       padding: EdgeInsets.symmetric(horizontal: 15),
