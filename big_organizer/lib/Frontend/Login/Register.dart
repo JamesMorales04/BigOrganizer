@@ -27,6 +27,7 @@ class _RegisterState extends State<Register> {
   String _confirmar;
   List<String> _generos = ['Masculino', 'Femenino', 'Helicopter'];
   String _errores = "";
+  String _userId;
 
   @override
   Widget build(BuildContext context) {
@@ -283,6 +284,7 @@ class _RegisterState extends State<Register> {
       print(_confirmar);
       try {
         String _id = await widget.auth.signUp(_correo, _contrasena);
+        _userId=_id;
         print(_genero);
         print(_pais);
         Envio_usuario envio = new Envio_usuario(
@@ -301,7 +303,7 @@ class _RegisterState extends State<Register> {
   void _valido() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Menu(auth: widget.auth)),
+      MaterialPageRoute(builder: (context) => Menu(auth: widget.auth,userId: _userId,)),
     );
   }
 

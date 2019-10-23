@@ -1,17 +1,20 @@
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
+import 'package:big_organizer/Backend/Obtener/Obtener_usuario.dart';
 import 'package:big_organizer/Backend/Tablas/Asistente.dart' as asistente_tabla;
 import 'package:big_organizer/Frontend/Calendario/Calendario.dart';
 import 'package:big_organizer/Frontend/Menu/Settings.dart';
 import 'package:big_organizer/Frontend/Actividades/Actividades.dart';
 import 'package:big_organizer/Frontend/Tienda/Tienda.dart';
 import 'package:big_organizer/Frontend/Asistente/Asistente.dart' as asistente_menu;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
   @override
   _MenuState createState() => _MenuState();
-  Menu({this.auth});
+  Menu({this.auth,this.userId});
   final BaseAuth auth;
+  final userId;
 }
 
 class _MenuState extends State<Menu> {
@@ -49,7 +52,7 @@ class _MenuState extends State<Menu> {
       children: <Widget>[
         ButtonTheme(
           minWidth: 300.0,
-          height: 200.0,
+          height: 150.0,
           child: 
             FlatButton.icon(
             color: Color.fromARGB(255, 63, 169, 245),
@@ -91,6 +94,7 @@ class _MenuState extends State<Menu> {
 
   Widget _ajustes(){
     return new ButtonTheme(
+      padding: EdgeInsets.only(top: 10),
       minWidth: 200.0,
       height: 100.0,
       child: FlatButton.icon(
@@ -131,9 +135,28 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.userId);
+    return new StreamBuilder(
+      stream:Firestore.instance.collection("Usuario").document(widget.userId).snapshots() ,
+      builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Container();
+          }
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Container();
+            default:
+              return menu(snapshot.data);
+          }
+        }
+    );
+  }
+
+  Widget menu(DocumentSnapshot document){
+    String name=document['name'];
     return new Scaffold(
       appBar: new AppBar(
-          title: Text("Hola, "+"#Username#"+"."),
+          title: Text(name),
           automaticallyImplyLeading: false),
       body: Center(
         child: 
@@ -146,6 +169,7 @@ class _MenuState extends State<Menu> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       _tienda(),
                       _ajustes(),
@@ -164,4 +188,7 @@ class _MenuState extends State<Menu> {
       ),
     );
   }
+
+
 }
+

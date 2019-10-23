@@ -1,5 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
-
 class Objetivo {
   //Definicion de atributos de la matriz o tabla de la base de datos
   String _id;
@@ -17,23 +15,7 @@ class Objetivo {
 
   //Constructor encargado de inicializarme los valores
   Objetivo(this._id,this._name,this._description,this._score,this._active);
-
-  //Mapeo necesario para poder definirlo como una tabla perteneciente a la base de datos
-  Objetivo.map(dynamic obj){
-    this._name=obj['name'];
-    this._description=obj['description'];
-    this._score=obj['score'];
-    this._active=obj['active'];
-  }
-
-  //Asignacion de funcion en la base de datos
-  Objetivo.fromSnapShot(DataSnapshot snapshot):
-    _id=snapshot.key,
-    _name=snapshot.value['name'],
-    _description=snapshot.value['description'],
-    _score=snapshot.value['score'],
-    _active=snapshot.value['active'];
-
+  
   //Creaccion del json para el Query
   toJson() {
     return {

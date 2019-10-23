@@ -16,6 +16,7 @@ class _LoginState extends State<Login> {
 
   String _correo;
   String _contrasena;
+  String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +143,7 @@ class _LoginState extends State<Login> {
       print(_contrasena);
       try {
         String _id = await widget.auth.signIn(_correo, _contrasena);
+        userId =_id;
         print('Signed in: $_id');
         _valido();
       } catch (e) {
@@ -154,7 +156,7 @@ class _LoginState extends State<Login> {
   void _valido() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Menu(auth: widget.auth)),
+      MaterialPageRoute(builder: (context) => Menu(auth: widget.auth, userId: userId,)),
     );
   }
 

@@ -1,5 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
-
 class Configuracion {
   //Definicion de atributos de la matriz o tabla de la base de datos
   bool _modo_oscuro;
@@ -15,20 +13,6 @@ class Configuracion {
 
   //Constructor encargado de inicializarme los valores
   Configuracion(this._modo_oscuro,this._idioma,this._frecuencia_objetivos);
-
-  //Mapeo necesario para poder definirlo como una tabla perteneciente a la base de datos
-  Configuracion.map(dynamic obj){
-    this._modo_oscuro=obj['modo_oscuro'];
-    this._idioma=obj['idioma'];
-    this._frecuencia_objetivos=obj['frecuencia_objetivos'];
-
-  }
-
-  //Asignacion de funcion en la base de datos
-  Configuracion.fromSnapShot(DataSnapshot snapshot):
-    _modo_oscuro=snapshot.value['modo_oscuro'],
-    _idioma=snapshot.value['idioma'],
-    _frecuencia_objetivos=snapshot.value['frecuencia_objetivos'];
 
   //Creaccion del json para el Query
   toJson() {
