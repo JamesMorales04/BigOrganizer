@@ -1,0 +1,53 @@
+{
+  "app_title": "Big Organizer",
+  "app_greeting": "Hola, ",
+
+  "tab_home": "Inicio",
+  "tab_activities": "Actividades",
+  "tab_calendar": "Calendario",
+  "tab_store": "Tienda",
+  "tab_assistant": "Asistente",
+  "tab_settings": "Ajustes",
+
+  "button_login": "Iniciar sesión",
+  "button_register": "Registrarse",
+  
+  "button_language": "Cambiar idioma",
+  "button_help": "Ayuda!",
+  "button_forgot_password": "¿Olvidaste tu contraseña?",
+  "button_back": "Volver",
+  "button_accept": "Aceptar",
+  "button_cancel": "Cancelar",
+  "button_close": "Cerrar",
+  "button_logout": "Cerrar sesión",
+  "button_delete_account": "Borrar cuenta",
+
+  "key_password": "Contraseña",
+  "key_confirm_password": "Confirmar contraseña",
+  "key_must_be_at_least_6_characters": "Debe tener al menos 6 caracteres",
+  "key_must_not_be_blank": "La contraseña no debe estar en blanco",
+  "key_email": "Correo electrónico",
+  "key_please_enter_valid_email": "Porfavor ingrese un correo válido",
+  "key_full_name": "Nombre completo",
+  "key_enter_full_name": "Ingresa tu nombre completo",
+  "key_next": "Siguiente",
+  "key_gender": "Género",
+  "key_select_your_birthdate": "Selecciona tu fecha de nacimiento",
+
+  "gender_male": "Masculino",
+  "gender_female": "Femenino",
+  "gender_helicopter": "Helicóptero de ataque",
+  
+  "popup_invalid": "Correo o contraseña inválidos",
+  "popup_gender": "Porfavor selecciona un género",
+  "popup_country": "Porfavor selecciona un país",
+  "popup_birthdate": "Porfavor selecciona tu fecha de nacimiento",
+  "popup_passwords_dont_match": "Las contraseñas no coinciden",
+  "popup_cannot_be_undone": "Esta acción no se puede revertir",
+  "popup_already_in_use": "Esta cuenta ya se encuentra en uso",
+
+  "message_are_you_sure": "¿Estas seguro?",
+  "message_nothing_here": "Nada que ver aquí",
+  "message_alternative_login": "O inicia con"
+  
+}

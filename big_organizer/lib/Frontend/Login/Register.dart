@@ -1,4 +1,5 @@
 import 'package:big_organizer/Backend/Envio/Envio_usuario.dart';
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:big_organizer/Frontend/Menu/Menu.dart';
 import 'package:flutter/material.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
@@ -20,12 +21,12 @@ class _RegisterState extends State<Register> {
   String _nombre;
   String _correo;
   String _contrasena;
-  String _fecha = "Ingresa una fecha de nacimiento";
+  String _fecha = allTranslations.text('key_select_your_birthdate');
   DateTime _fecha_de_nacimiento;
   String _genero;
   Country _pais;
   String _confirmar;
-  List<String> _generos = ['Masculino', 'Femenino', 'Helicopter'];
+  List<String> _generos = [allTranslations.text('gender_male'), allTranslations.text('gender_female'), allTranslations.text('gender_helicopter')];
   String _errores = "";
   String _userId;
 
@@ -57,7 +58,7 @@ class _RegisterState extends State<Register> {
     return new Container(
       padding: EdgeInsets.only(top: 70),
       child: Text(
-        "Register",
+        allTranslations.text('button_register'),
         style: TextStyle(fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
         textScaleFactor: 3,
@@ -87,8 +88,8 @@ class _RegisterState extends State<Register> {
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: new TextFormField(
         autofocus: false,
-        decoration: new InputDecoration(hintText: 'Nombre completo'),
-        validator: (value) => value.isEmpty ? 'Ingresa un nombre' : null,
+        decoration: new InputDecoration(hintText: allTranslations.text('key_full_name')),
+        validator: (value) => value.isEmpty ? allTranslations.text('key_enter_full_name') : null,
         onSaved: (value) => _nombre = value.trim(),
       ),
     );
@@ -128,10 +129,10 @@ class _RegisterState extends State<Register> {
       child: new TextFormField(
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
-        decoration: new InputDecoration(hintText: 'Correo Electronico'),
+        decoration: new InputDecoration(hintText: allTranslations.text('key_email')),
         validator:(value) {
           if(value.isEmpty){
-            return "El correo no pude estar vacio";
+            return allTranslations.text('key_please_enter_valid_email');
           }
           return null;
         },
@@ -146,13 +147,13 @@ class _RegisterState extends State<Register> {
       child: new TextFormField(
         obscureText: true,
         autofocus: false,
-        decoration: new InputDecoration(hintText: 'Contraseña'),
+        decoration: new InputDecoration(hintText: allTranslations.text('key_password')),
         validator:(value) {
           if(value.isEmpty){
-            return "La contraseña no puede estar vacio";
+            return allTranslations.text('key_must_not_be_blank');
           }
           if(value.length<6){
-            return "La contraseña debe tener almenos 6 caracteres";
+            return allTranslations.text('key_must_be_at_least_6_characters');
           }
           return null;
         },
@@ -167,10 +168,10 @@ class _RegisterState extends State<Register> {
       child: new TextFormField(
         autofocus: false,
         obscureText: true,
-        decoration: new InputDecoration(hintText: 'Confirmar Contraseña'),
+        decoration: new InputDecoration(hintText: allTranslations.text('key_confirm_password')),
         validator: (value) {
           if (value.isEmpty) {
-            return "Debe tener 6 caracteres";
+            return allTranslations.text('key_must_be_at_least_6_characters');
           }
           return null;
         },
@@ -184,7 +185,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
         child: new DropdownButton<String>(
           isExpanded: true,
-          hint: Text("Genero"),
+          hint: Text(allTranslations.text('key_gender')),
           value: _genero,
           items: _generos.map((String valor) {
             return new DropdownMenuItem<String>(
@@ -201,6 +202,23 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _country() {
+    _pais = Country.CO;
+    return Padding(
+        padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
+        child: CountryPicker(
+          dense: false,
+          showFlag: true,  //displays flag, true by default
+          showDialingCode: false, //displays dialing code, false by default
+          showName: true, //displays country name, true by default
+          onChanged: (Country country) {
+            setState(() {
+              _pais = country;
+            });
+          },
+          selectedCountry: _pais,
+        ),
+    );
+    /*
     return Padding(
         padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
         child: CountryPicker(
@@ -214,7 +232,7 @@ class _RegisterState extends State<Register> {
             });
           },
           selectedCountry: _pais,
-        ));
+        ));*/
   }
 
   Widget _registrar() {
@@ -222,7 +240,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.only(top: 30),
         child: RaisedButton(
             child: Text(
-              "Registrar",
+              allTranslations.text('button_register'),
               style: TextStyle(color: Colors.white),
             ),
             color: Color.fromARGB(255, 63, 169, 245),
@@ -236,7 +254,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.only(top: 30),
         child: RaisedButton(
             child: Text(
-              "Volver",
+              allTranslations.text('button_back'),
               style: TextStyle(color: Colors.white),
             ),
             color: Color.fromARGB(255, 63, 169, 245),
@@ -253,22 +271,22 @@ class _RegisterState extends State<Register> {
     if (form.validate()) {
       form.save();
       if(_contrasena!=_confirmar){
-        _errores = "Ambas contraseñas no coinciden";
+        _errores = allTranslations.text('popup_passwords_dont_match');
         _error(context);
         return false;
       }
       if (_genero == null) {
-        _errores = "Por favor ingresa un genero";
+        _errores = allTranslations.text('popup_gender');
         _error(context);
         return false;
       }
       if (_fecha_de_nacimiento == null) {
-        _errores = "Por favor ingresa una fecha de nacimiento";
+        _errores = allTranslations.text('popup_birthdate');
         _error(context);
         return false;
       }
       if (_pais == null) {
-        _errores = "Por favor ingresa un pais";
+        _errores = allTranslations.text('popup_country');
         _error(context);
         return false;
       }
@@ -293,7 +311,7 @@ class _RegisterState extends State<Register> {
         print('Signed in: $_id');
         _valido();
       } catch (e) {
-        _errores="Esta cuenta ya esta en uso";
+        _errores=allTranslations.text('popup_already_in_use');
         _error(context);
         print('jelouda');
       }
@@ -315,7 +333,7 @@ class _RegisterState extends State<Register> {
             content: new Text(_errores),
             actions: <Widget>[
               FlatButton(
-                child: const Text('Cerrar'),
+                child: Text(allTranslations.text('button_close')),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },

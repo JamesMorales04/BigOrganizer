@@ -1,5 +1,6 @@
 import 'package:big_organizer/Frontend/Menu/Menu.dart';
 import 'package:flutter/material.dart';
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 
 class Login extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LoginState extends State<Login> {
     return new Container(
       padding: EdgeInsets.only(top: 70),
       child: Text(
-        "Login",
+        allTranslations.text('button_login'),
         style: TextStyle(fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
         textScaleFactor: 5,
@@ -66,8 +67,8 @@ class _LoginState extends State<Login> {
       child: new TextFormField(
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
-        decoration: new InputDecoration(hintText: 'Correo Electronico'),
-        validator: (value) => value.isEmpty ? 'Ingresa un correo valido' : null,
+        decoration: new InputDecoration(hintText: allTranslations.text('key_email')),
+        validator: (value) => value.isEmpty ? allTranslations.text('key_please_enter_valid_email') : null,
         onSaved: (value) => _correo = value.trim(),
       ),
     );
@@ -79,9 +80,9 @@ class _LoginState extends State<Login> {
         child: new TextFormField(
           autofocus: false,
           obscureText: true,
-          decoration: InputDecoration(hintText: "Contraseña"),
+          decoration: InputDecoration(hintText: allTranslations.text('key_password')),
           validator: (value) =>
-              value.isEmpty ? 'La contraseña no puede ser vacia' : null,
+              value.isEmpty ? allTranslations.text('key_must_not_be_blank') : null,
           onSaved: (value) => _contrasena = value.trim(),
         ));
   }
@@ -91,7 +92,7 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.only(top: 10),
         child: FlatButton(
           child: Text(
-            "¿ Olvidaste tu contraseña ?",
+            allTranslations.text('button_forgot_password'),
             style: TextStyle(color: Colors.blue),
           ),
           onPressed: () {},
@@ -103,7 +104,7 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.only(top: 70),
         child: RaisedButton(
           child: Text(
-            "Iniciar Sesion",
+            allTranslations.text('button_login'),
             style: TextStyle(color: Colors.white),
           ),
           color: Color.fromARGB(255, 63, 169, 245),
@@ -117,7 +118,7 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.only(top: 20),
         child: RaisedButton(
           child: Text(
-            "Volver",
+            allTranslations.text('button_back'),
             style: TextStyle(color: Colors.white),
           ),
           color: Color.fromARGB(255, 63, 169, 245),
@@ -165,10 +166,10 @@ class _LoginState extends State<Login> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: const Text("El correo o la contraseña no son validos"),
+            content: Text(allTranslations.text('popup_invalid')),
             actions: <Widget>[
               FlatButton(
-                child: const Text('Cerrar'),
+                child: Text(allTranslations.text('button_close')),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },

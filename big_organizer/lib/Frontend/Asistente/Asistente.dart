@@ -1,4 +1,5 @@
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:flutter/material.dart';
 
 class Asistente extends StatefulWidget {
@@ -14,11 +15,11 @@ class _AsistenteState extends State<Asistente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Asistente"),
+        title: Text(allTranslations.text('tab_assistant')),
       ),
       body: Center(
         child: 
-          Text("Nada que ver aquí"),
+          Text(allTranslations.text('message_nothing_here')),
       ),
     );
   }

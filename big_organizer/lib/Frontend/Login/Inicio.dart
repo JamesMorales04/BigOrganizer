@@ -2,11 +2,20 @@ import 'package:big_organizer/Backend/Envio/Envio_frases.dart';
 import 'package:big_organizer/Frontend/Login/Login.dart';
 import 'package:big_organizer/Frontend/Login/Register.dart';
 import 'package:flutter/material.dart';
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 
-class Inicio extends StatelessWidget {
+class Inicio extends StatefulWidget{
   Inicio({this.auth});
+
   final BaseAuth auth;
+
+  @override
+  State<StatefulWidget> createState() => new _InicioState();
+}
+
+class _InicioState extends State<Inicio> {
+
   @override
   Widget build(BuildContext context) {
     Envio_frases envio = new Envio_frases(frases: "Un buen trabajo es una buena vida");
@@ -44,16 +53,25 @@ class Inicio extends StatelessWidget {
   
 
   Widget _lenguaje() {
+    final String language = allTranslations.currentLanguage;
     return new Container(
       padding: EdgeInsets.only(top: 10),
-      child:Text("Lenguaje",)
+      child: FlatButton(
+        child: Text(allTranslations.text('button_language')),
+        onPressed: (){
+        allTranslations.setNewLanguage(language == 'es' ? 'en' : 'es');
+        setState((){});
+        },
+      ),
+      
     );
   }
 
   Widget _help() {
     return new FlatButton(
       padding: EdgeInsets.only(top: 10),
-      child:Text("Help!",style: TextStyle(color: Colors.blue),)
+      onPressed: null,
+      child:Text(allTranslations.text('button_help'),style: TextStyle(color: Colors.blue),)
     );
   }
 
@@ -80,7 +98,7 @@ class Inicio extends StatelessWidget {
   Widget _otros_inicios_texto() {
     return new Container(
       padding: EdgeInsets.only(top: 10),
-      child: Text('O ingresa con'),
+      child: Text(allTranslations.text('message_alternative_login')),
     );
   } 
 
@@ -98,7 +116,7 @@ class Inicio extends StatelessWidget {
     return new Container(
       padding: EdgeInsets.only(top: 20),
       child: Text(
-        "Big Organizer",
+        allTranslations.text('app_title'),
         style: TextStyle(fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
         textScaleFactor: 3,
@@ -111,14 +129,14 @@ class Inicio extends StatelessWidget {
         padding: EdgeInsets.only(top: 100),
         child: RaisedButton(
           child: Text(
-            "Iniciar Sesion",
+            allTranslations.text('button_login'),
             style: TextStyle(color: Colors.white),
           ),
           color: Color.fromARGB(255, 63, 169, 245),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Login(auth: auth)),
+              MaterialPageRoute(builder: (context) => Login(auth: widget.auth)),
             );
           },
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
@@ -130,14 +148,14 @@ class Inicio extends StatelessWidget {
         padding: EdgeInsets.only(top: 15),
         child: RaisedButton(
           child: Text(
-            "Registrarse",
+            allTranslations.text('button_register'),
             style: TextStyle(color: Colors.white),
           ),
           color: Color.fromARGB(255, 63, 169, 245),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Register(auth: auth,)),
+              MaterialPageRoute(builder: (context) => Register(auth: widget.auth,)),
             );
           },
           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
@@ -14,7 +15,7 @@ class _CalendarioState extends State<Calendario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calendario"),
+        title: Text(allTranslations.text('tab_calendar')),
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {

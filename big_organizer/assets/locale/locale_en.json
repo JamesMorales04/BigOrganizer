@@ -1,0 +1,53 @@
+{
+    "app_title": "Big Organizer",
+    "app_greeting": "Hello, ",
+
+    "tab_home": "Home",
+    "tab_activities": "Activities",
+    "tab_calendar": "Calendar",
+    "tab_store": "Store",
+    "tab_assistant": "Assistant",
+    "tab_settings": "Settings",
+
+    "button_login": "Log in",
+    "button_register": "Register",
+    
+    "button_language": "Change language",
+    "button_help": "Help!",
+    "button_forgot_password": "Forgot your password?",
+    "button_back": "Go back",
+    "button_accept": "Accept",
+    "button_cancel": "Cancel",
+    "button_close": "Close",
+    "button_logout": "Log out",
+    "button_delete_account": "Delete account",
+
+    "key_password": "Password",
+    "key_confirm_password": "Confirm password",
+    "key_must_be_at_least_6_characters": "Must be at least 6 characters",
+    "key_must_not_be_blank": "Password must not be blank",
+    "key_email": "Email",
+    "key_please_enter_valid_email": "Please enter a valid email",
+    "key_full_name": "Full name",
+    "key_enter_full_name": "Enter your full name",
+    "key_next": "Next",
+    "key_gender": "Gender",
+    "key_select_your_birthdate": "Select your birth date",
+
+    "gender_male": "Male",
+    "gender_female": "Female",
+    "gender_helicopter": "Attack helicopter",
+    
+    "popup_invalid": "Invalid email or password",
+    "popup_gender": "Please select a gender",
+    "popup_country": "Please select a country",
+    "popup_birthdate": "Please select your birth date",
+    "popup_passwords_dont_match": "Passwords do not match",
+    "popup_cannot_be_undone": "This action cannot be undone",
+    "popup_already_in_use": "This account is already in use",
+
+    "message_are_you_sure": "Are you sure?",
+    "message_nothing_here": "Nothing to see here",
+    "message_alternative_login": "Or login with"
+    
+  }

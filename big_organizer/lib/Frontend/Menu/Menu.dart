@@ -6,6 +6,7 @@ import 'package:big_organizer/Frontend/Menu/Settings.dart';
 import 'package:big_organizer/Frontend/Actividades/Actividades.dart';
 import 'package:big_organizer/Frontend/Tienda/Tienda.dart';
 import 'package:big_organizer/Frontend/Asistente/Asistente.dart' as asistente_menu;
+import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,8 @@ class _MenuState extends State<Menu> {
           child: 
             FlatButton.icon(
             color: Color.fromARGB(255, 80, 113, 255),
-            //icon: Icon(Icons.assessment, color: Colors.white, size: 80), //`Icon` to display
             icon: ImageIcon(AssetImage("assets/icons/activities_icon.png"), size: 50, color:Colors.white),
-            label: Text('Actividades', style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
+            label: Text(allTranslations.text('tab_activities'), style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
             onPressed: () {
               Navigator.push(
                   context,
@@ -54,7 +54,7 @@ class _MenuState extends State<Menu> {
             FlatButton.icon(
             color: Color.fromARGB(255, 245, 63, 169),
             icon: ImageIcon(AssetImage("assets/icons/calendar_icon.png"), size: 50, color:Colors.white), //`Icon` to display
-            label: Text('Calendario', style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
+            label: Text(allTranslations.text('tab_calendar'), style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
             onPressed: () {
                 Navigator.push(
                   context,
@@ -77,7 +77,7 @@ class _MenuState extends State<Menu> {
       child: FlatButton.icon(
           color: Color.fromARGB(255, 63, 169, 245),
           icon: ImageIcon(AssetImage("assets/icons/store_icon.png"), size: 50, color:Colors.white), //`Icon` to display
-          label: Text('Tienda', style: TextStyle(color: Colors.white)), //`Text` to display
+          label: Text(allTranslations.text('tab_store'), style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
             Navigator.push(
                   context,
@@ -99,7 +99,7 @@ class _MenuState extends State<Menu> {
       child: FlatButton.icon(
           color: Color.fromARGB(255, 50, 50, 50),
           icon: ImageIcon(AssetImage("assets/icons/settings_icon.png"), size: 50, color:Colors.white), //`Icon` to display
-          label: Text('Ajustes', style: TextStyle(color: Colors.white)), //`Text` to display
+          label: Text(allTranslations.text('tab_settings'), style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
               Navigator.push(
                 context,
@@ -121,7 +121,7 @@ class _MenuState extends State<Menu> {
       child: FlatButton.icon(
           color: Color.fromARGB(255, 169, 63, 245),
           icon: ImageIcon(AssetImage("assets/icons/assistant_icon.png"), size: 50, color:Colors.white), //`Icon` to display
-          label: Text('Asistente', style: TextStyle(color: Colors.white)), //`Text` to display
+          label: Text(allTranslations.text('tab_assistant'), style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
             Navigator.push(
                   context,
@@ -157,7 +157,7 @@ class _MenuState extends State<Menu> {
     String name=document['name'];
     return new Scaffold(
       appBar: new AppBar(
-          title: Text("Hola, ${name}!"),
+          title: Text(allTranslations.text('app_greeting') + name + "!"),
           automaticallyImplyLeading: false),
       body: Center(
         child: 
