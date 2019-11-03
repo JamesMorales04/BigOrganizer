@@ -1,11 +1,16 @@
+import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:big_organizer/Frontend/Actividades/Actividades.dart';
 
 
 class Calendario extends StatefulWidget {
   @override
   _CalendarioState createState() => _CalendarioState();
+  Calendario({this.auth,this.userId});
+  final BaseAuth auth;
+  final userId;
 }
 
 class _CalendarioState extends State<Calendario> {
@@ -16,13 +21,6 @@ class _CalendarioState extends State<Calendario> {
     return Scaffold(
       appBar: AppBar(
         title: Text(allTranslations.text('tab_calendar')),
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              _calendarController.dispose();
-              Navigator.of(context).pop();
-            },
-          )
       ),
       body: Container(
           padding: EdgeInsets.only(top: 20),
@@ -44,6 +42,9 @@ class _CalendarioState extends State<Calendario> {
   Widget _buildTableCalendar() {
     return TableCalendar(
       calendarController: _calendarController,
+      onDaySelected: (diaSeleccionado, list_eventosDiaSeleccionado) {
+        _diaSeleccionado(diaSeleccionado.day, list_eventosDiaSeleccionado);
+      },
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
         selectedColor: Colors.deepOrange[400],
@@ -58,6 +59,12 @@ class _CalendarioState extends State<Calendario> {
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
+    );
+  }
+  void _diaSeleccionado(diaSeleccionado, list_eventosDiaSeleccionado) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Actividades(auth: widget.auth,userId: widget.userId ,diaSeleccionado: diaSeleccionado)),
     );
   }
 }

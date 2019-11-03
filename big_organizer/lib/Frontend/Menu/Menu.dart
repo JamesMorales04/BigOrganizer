@@ -1,3 +1,4 @@
+import 'package:big_organizer/Backend/Autenticacion/Creacion/Auth.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 import 'package:big_organizer/Backend/Obtener/Obtener_usuario.dart';
 import 'package:big_organizer/Backend/Tablas/Asistente.dart' as asistente_tabla;
@@ -59,7 +60,7 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Calendario()),
+                      builder: (context) => Calendario(auth: widget.auth,userId: widget.userId,)),
                 );
               },
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
