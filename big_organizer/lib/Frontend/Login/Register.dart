@@ -24,7 +24,7 @@ class _RegisterState extends State<Register> {
   String _fecha = allTranslations.text('key_select_your_birthdate');
   DateTime _fecha_de_nacimiento;
   String _genero;
-  Country _pais;
+  Country _pais = Country.CO;
   String _confirmar;
   List<String> _generos = [allTranslations.text('gender_male'), allTranslations.text('gender_female'), allTranslations.text('gender_helicopter')];
   String _errores = "";
@@ -202,7 +202,6 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _country() {
-    _pais = Country.CO;
     return Padding(
         padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
         child: CountryPicker(
