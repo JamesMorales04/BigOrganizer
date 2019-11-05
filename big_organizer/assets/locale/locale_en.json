@@ -48,6 +48,8 @@
 
     "message_are_you_sure": "Are you sure?",
     "message_nothing_here": "Nothing to see here",
-    "message_alternative_login": "Or login with"
+    "message_alternative_login": "Or login with",
+
+    "message_select_language": "Select language"
     
   }

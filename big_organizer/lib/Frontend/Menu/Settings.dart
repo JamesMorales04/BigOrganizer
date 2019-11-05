@@ -12,6 +12,48 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
 
+  Widget _listaidiomas(){
+    String valor = allTranslations.text('button_language');
+    return new Container(
+      padding: EdgeInsets.only(top: 10),
+      child: new DropdownButton<String>(
+            hint: Text(valor),
+            items: <String>['English', 'Español', 'Português'].map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(value),
+              );
+            }).toList(),
+            onChanged: (String value) {
+              valor = value;
+              allTranslations.setNewLanguage(value);
+              Navigator.of(context).pop();
+              setState((){});
+            },
+          ),
+    );
+  }
+
+  void _seleccionaridioma() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text(allTranslations.text('message_select_language')),
+          actions: <Widget>[
+            _listaidiomas(),
+            new FlatButton(
+              child: new Text(allTranslations.text('button_cancel')),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _confirmarborrado() {
     showDialog(
       context: context,
@@ -42,13 +84,11 @@ class _SettingsState extends State<Settings> {
   }
 
   Widget _cambiaridioma() {
-    final String language = allTranslations.currentLanguage;
     return new ButtonTheme(
       minWidth: double.infinity,
       child: RaisedButton(
       onPressed: () {
-        allTranslations.setNewLanguage(language == 'es' ? 'en' : 'es');
-        setState((){});
+        _seleccionaridioma();
       },
       child: Text(allTranslations.text('button_language'), style: TextStyle(color: Colors.white)),
       color: Color.fromARGB(255, 63, 169, 245),

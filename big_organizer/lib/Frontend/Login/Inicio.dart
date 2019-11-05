@@ -53,17 +53,23 @@ class _InicioState extends State<Inicio> {
   
 
   Widget _lenguaje() {
-    final String language = allTranslations.currentLanguage;
+    String valor = allTranslations.text('button_language');
     return new Container(
       padding: EdgeInsets.only(top: 10),
-      child: FlatButton(
-        child: Text(allTranslations.text('button_language')),
-        onPressed: (){
-        allTranslations.setNewLanguage(language == 'es' ? 'en' : 'es');
-        setState((){});
-        },
-      ),
-      
+      child: new DropdownButton<String>(
+            hint: Text(valor),
+            items: <String>['English', 'Español', 'Português'].map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(value),
+              );
+            }).toList(),
+            onChanged: (String value) {
+              valor = value;
+              allTranslations.setNewLanguage(value);
+              setState((){});
+            },
+          ),
     );
   }
 

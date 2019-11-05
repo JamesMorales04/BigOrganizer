@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Preferences related
 ///
 const String _storageKey = "BigOrganizer_";
-const List<String> _supportedLanguages = ['en','es'];
+const List<String> _supportedLanguages = ['en','es','pt'];
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class GlobalTranslations {
@@ -46,9 +46,32 @@ class GlobalTranslations {
       language = await getPreferredLanguage();
     }
 
-    if (language == ""){
-      language = "en";
+    switch (language) {
+      
+      case "English":
+        {
+          language = "en";
+        }
+      break;
+
+      case "Español":
+        {
+          language = "es";
+        }
+      break;
+
+      case "Português":
+        {
+          language = "pt";
+        }
+      break;
+      
+      default:
+        {
+          language = "en";
+        }
     }
+    
     _locale = Locale(language, "");
 
     String jsonContent = await rootBundle.loadString("assets/locale/locale_${_locale.languageCode}.json");
