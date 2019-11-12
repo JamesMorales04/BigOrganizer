@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Envio_actividades {
   Envio_actividades({this.userId,this.id,this.name,this.icon,this.description,this.diaSeleccionado});
+  
   final Firestore _database = Firestore.instance;
   
   String userId;

@@ -4,10 +4,12 @@ class Obtener_usuario {
   Obtener_usuario({this.userId});
   String userId;
   String nombre;
+
   obtener_datos(){
 
    DocumentReference documentReference =
                 Firestore.instance.collection("Usuario").document(userId);
+                
             documentReference.get().then((datasnapshot) {
               if (datasnapshot.exists) {
                 nombre=datasnapshot.data['name'].toString();

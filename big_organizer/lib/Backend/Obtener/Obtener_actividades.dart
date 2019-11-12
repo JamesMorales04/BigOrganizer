@@ -4,28 +4,34 @@ import 'package:flutter/material.dart';
 class Obtener_actividad {
   Obtener_actividad({this.userId});
   String userId;
-  String userId_db;
-
+  String datosActividades; 
+/*
   obtener_datos(){
+
    DocumentReference documentReference =
-                Firestore.instance.collection("Actividad").document(userId);
+                Firestore.instance.collection("Actividad").document(userId).collection("ActividadesUsuario").document("LevH2WOiXBeGaTPGFYwK");
+
             documentReference.get().then((datasnapshot) {
               if (datasnapshot.exists) {
-                userId_db=datasnapshot.data['userId'];
+                datosActividades=datasnapshot.data['name'].toString();
                 print("esto es lo que hay-------");
-                print(userId_db.trimRight());
+                print("metodo al que quiero llegar");
                 print("esto es lo que hay-------");
-                return userId_db;
               }
               else{
                 print("No such userId");
               }
-            });
+            }
+          );
+  }*/
+
+  obtener_datos() async {
+    
   }
 
   Future<String> valor() async {
     await obtener_datos();
-    print(userId_db);
-    return userId_db;
+    print("holaaaa");
+    return "holaaaaaaaaaaaa";
   }
 }
