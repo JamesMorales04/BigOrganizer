@@ -92,7 +92,7 @@ class _ActividadesState extends State<Actividades> {
                                     auth: widget.auth,
                                     userId: widget.userId,
                                     diaSeleccionado: values[index].diaSeleccionado,
-                                    bl: false,
+                                    bl: true,
                                   )
                               ),
                             );
@@ -245,12 +245,15 @@ class _AgregarActividadState extends State<AgregarActividad> {
             _description = textControlerDescription.text;
             _userId = widget.userId;
             _diaSeleccionado = widget.diaSeleccionado.toString();
+            if(widget.diaSeleccionado==null){
+              _diaSeleccionado = ' no establecido';
+            }
             _icon = "hola soy un icono";
-            test = _name + _description + _diaSeleccionado;
-            print('dia sel: ${widget.diaSeleccionado.toString()}');
+            test = 'Enviado';
           });
           enviaActividadBd(
-              _userId, _id, _name, _icon, _description, _diaSeleccionado);
+            _userId, _id, _name, _icon, _description, _diaSeleccionado
+          );
         },
       )),
     );
