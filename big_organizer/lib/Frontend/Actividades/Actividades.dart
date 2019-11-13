@@ -1,6 +1,5 @@
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
 import 'package:big_organizer/Backend/Envio/Envio_actividades.dart';
-import 'package:big_organizer/Backend/Obtener/Obtener_actividades.dart';
 import 'package:big_organizer/Frontend/Actividades/Actividad.dart';
 import 'package:big_organizer/Frontend/Lenguaje/Traduccion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,17 +8,18 @@ import 'package:flutter/material.dart';
 class Actividades extends StatefulWidget {
   @override
   _ActividadesState createState() => _ActividadesState();
-  Actividades({this.auth, this.userId, this.diaSeleccionado});
+  Actividades({this.auth, this.userId, this.diaSeleccionado, this.bl});
   final BaseAuth auth;
   final userId;
   final diaSeleccionado;
+  final bl;
 }
 
 class _ActividadesState extends State<Actividades> {
   final db = Firestore.instance;
-
   @override
   Widget build(BuildContext context) {
+
     var futurebuilder = new FutureBuilder(
       future: _consultarActividadesBd(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -61,22 +61,50 @@ class _ActividadesState extends State<Actividades> {
     return ListView.builder(
       itemCount: values.length,
       itemBuilder: (BuildContext context, int index) {
-        if (values.length == null) {
-          print('agrega actividades');
-        }
+      
         return Column(
           children: <Widget>[
-            new ListTile(
-              title: new Text(values[index].name),
-              subtitle: new Text(
-                  '${values[index].description} ${values[index].diaSeleccionado}'),
-              leading: new Icon(Icons.calendar_today),
-              onTap: () {
-                //implementar vista completa de los datos de la actividad
-              },
-            ),
-            Divider(
-              height: 2.0,
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new ListTile(
+                      title: new Text(values[index].name),
+                      subtitle: new Text(
+                          'Descrpcion: ${values[index].description} \nDia:${values[index].diaSeleccionado}'),
+                      leading: new Icon(Icons.calendar_today),
+                      onTap: () {
+                        //
+                      },
+                    ),
+                    Stack(children: <Widget>[
+                      Align(
+                        alignment: Alignment(0.9, 0.0),
+                        child: FlatButton(
+                          onPressed: () {
+                            deleteActividad(values[index].id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Actividades(
+                                    auth: widget.auth,
+                                    userId: widget.userId,
+                                    diaSeleccionado: values[index].diaSeleccionado,
+                                    bl: false,
+                                  )
+                              ),
+                            );
+                          },
+                          child: Text('Eliminar'),
+                          color: Colors.blue[400],
+                        ),
+                      )
+                    ])
+                  ],
+                ),
+              ),
             )
           ],
         );
@@ -101,13 +129,26 @@ class _ActividadesState extends State<Actividades> {
           icon: act['icon'],
           description: act['description'],
           diaSeleccionado: diaSeleccionado);
-      if (!arrActividades.contains(auxActividad) &&
-          widget.diaSeleccionado.toString() == act['diaSeleccionado']) {
-        arrActividades.add(auxActividad);
+      if (!arrActividades.contains(auxActividad)) {
+        if (widget.diaSeleccionado.toString() == act['diaSeleccionado'] && widget.bl==false) {
+          arrActividades.add(auxActividad);
+        } else if(widget.bl==true){
+          arrActividades.add(auxActividad);
+        }
+        
       }
     }
     print(arrActividades);
     return arrActividades;
+  }
+
+  void deleteActividad(idAct) async {
+    await db
+        .collection("Actividad")
+        .document(widget.userId)
+        .collection('ActividadesUsuario')
+        .document(idAct)
+        .delete();
   }
 }
 
@@ -226,3 +267,5 @@ class _AgregarActividadState extends State<AgregarActividad> {
     envio.addNewactividad();
   }
 }
+
+/*  */

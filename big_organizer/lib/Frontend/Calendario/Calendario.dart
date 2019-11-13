@@ -8,9 +8,10 @@ import 'package:big_organizer/Frontend/Actividades/Actividades.dart';
 class Calendario extends StatefulWidget {
   @override
   _CalendarioState createState() => _CalendarioState();
-  Calendario({this.auth,this.userId});
+  Calendario({this.auth,this.userId, this.bl});
   final BaseAuth auth;
   final userId;
+  final bl;
 }
 
 class _CalendarioState extends State<Calendario> {
@@ -64,7 +65,7 @@ class _CalendarioState extends State<Calendario> {
   void _diaSeleccionado(diaSeleccionado, list_eventosDiaSeleccionado) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Actividades(auth: widget.auth,userId: widget.userId ,diaSeleccionado: diaSeleccionado)),
+      MaterialPageRoute(builder: (context) => Actividades(auth: widget.auth,userId: widget.userId ,diaSeleccionado: diaSeleccionado, bl: false)),
     );
   }
 }

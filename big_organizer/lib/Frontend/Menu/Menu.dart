@@ -36,7 +36,7 @@ class _MenuState extends State<Menu> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Actividades()),
+                      builder: (context) => Actividades(auth: widget.auth,userId: widget.userId ,diaSeleccionado: null, bl: true)),
                 );
               },
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
@@ -60,7 +60,7 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Calendario(auth: widget.auth,userId: widget.userId,)),
+                      builder: (context) => Calendario(auth: widget.auth,userId: widget.userId, bl: false,)),
                 );
               },
             shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
