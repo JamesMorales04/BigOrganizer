@@ -217,21 +217,6 @@ class _RegisterState extends State<Register> {
           selectedCountry: _pais,
         ),
     );
-    /*
-    return Padding(
-        padding: EdgeInsets.fromLTRB(35, 20, 35, 0),
-        child: CountryPicker(
-          dense: false,
-          showFlag: true,
-          showDialingCode: false,
-          showName: true,
-          onChanged: (Country country) {
-            setState(() {
-              _pais = country;
-            });
-          },
-          selectedCountry: _pais,
-        ));*/
   }
 
   Widget _registrar() {

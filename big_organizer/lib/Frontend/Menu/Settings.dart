@@ -27,8 +27,8 @@ class _SettingsState extends State<Settings> {
             onChanged: (String value) {
               valor = value;
               allTranslations.setNewLanguage(value);
-              Navigator.of(context).pop();
               setState((){});
+              Navigator.of(context).pop();   
             },
           ),
     );

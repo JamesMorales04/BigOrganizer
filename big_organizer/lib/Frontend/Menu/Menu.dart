@@ -1,7 +1,4 @@
-import 'package:big_organizer/Backend/Autenticacion/Creacion/Auth.dart';
 import 'package:big_organizer/Backend/Autenticacion/Creacion/BaseAuth.dart';
-import 'package:big_organizer/Backend/Obtener/Obtener_usuario.dart';
-import 'package:big_organizer/Backend/Tablas/Asistente.dart' as asistente_tabla;
 import 'package:big_organizer/Frontend/Calendario/Calendario.dart';
 import 'package:big_organizer/Frontend/Menu/Settings.dart';
 import 'package:big_organizer/Frontend/Actividades/Actividades.dart';
@@ -29,7 +26,7 @@ class _MenuState extends State<Menu> {
         child: ButtonTheme(
           child: 
             FlatButton.icon(
-            color: Color.fromARGB(255, 80, 113, 255),
+            color: Color.fromARGB(255, 124, 77, 255),
             icon: ImageIcon(AssetImage("assets/icons/activities_icon.png"), size: 50, color:Colors.white),
             label: Text(allTranslations.text('tab_activities'), style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
             onPressed: () {
@@ -53,7 +50,7 @@ class _MenuState extends State<Menu> {
       child: ButtonTheme(
           child: 
             FlatButton.icon(
-            color: Color.fromARGB(255, 245, 63, 169),
+            color: Color.fromARGB(255, 236, 64, 122),
             icon: ImageIcon(AssetImage("assets/icons/calendar_icon.png"), size: 50, color:Colors.white), //`Icon` to display
             label: Text(allTranslations.text('tab_calendar'), style: TextStyle(color: Colors.white, fontSize: 32)), //`Text` to display
             onPressed: () {
@@ -76,7 +73,7 @@ class _MenuState extends State<Menu> {
       height:125,
       child: ButtonTheme(
       child: FlatButton.icon(
-          color: Color.fromARGB(255, 63, 169, 245),
+          color: Color.fromARGB(255, 33, 150, 243),
           icon: ImageIcon(AssetImage("assets/icons/store_icon.png"), size: 50, color:Colors.white), //`Icon` to display
           label: Text(allTranslations.text('tab_store'), style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {
@@ -120,7 +117,7 @@ class _MenuState extends State<Menu> {
       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
       height: 250,
       child: FlatButton.icon(
-          color: Color.fromARGB(255, 169, 63, 245),
+          color: Color.fromARGB(255, 213, 0, 249),
           icon: ImageIcon(AssetImage("assets/icons/assistant_icon.png"), size: 50, color:Colors.white), //`Icon` to display
           label: Text(allTranslations.text('tab_assistant'), style: TextStyle(color: Colors.white)), //`Text` to display
           onPressed: () {

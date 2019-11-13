@@ -50,6 +50,17 @@
     "message_nothing_here": "Nada para ver aqui",
     "message_alternative_login": "Ou faça login com",
 
-    "message_select_language": "Selecionar idioma"
+    "message_select_language": "Selecionar idioma",
+
+    "message_loading": "Carregando",
+    "message_sent": "Enviei",
+    
+    "activity_name": "Nome da atividade",
+    "activity_description": "Descrição",
+    "activity_add": "Adicionar atividade",
+    "activity_delete": "Excluir",
+    "activity_day": "Dia",
+    "activity_day_not_selected": "Não selecionado",
+    "activity_empty": "Nenhuma atividade"
     
   }

@@ -26,7 +26,7 @@ class _ActividadesState extends State<Actividades> {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:
-            return Text('loading');
+            return Text(allTranslations.text('message_loading'));
           default:
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -58,10 +58,9 @@ class _ActividadesState extends State<Actividades> {
 
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     List<Actividad> values = snapshot.data;
-    return ListView.builder(
+    return values.isEmpty ? Center(child: Text(allTranslations.text("activity_empty"))) : ListView.builder(
       itemCount: values.length,
       itemBuilder: (BuildContext context, int index) {
-      
         return Column(
           children: <Widget>[
             Card(
@@ -73,7 +72,7 @@ class _ActividadesState extends State<Actividades> {
                     new ListTile(
                       title: new Text(values[index].name),
                       subtitle: new Text(
-                          'Descrpcion: ${values[index].description} \nDia:${values[index].diaSeleccionado}'),
+                          '${allTranslations.text("activity_description")}: ${values[index].description} \n${allTranslations.text("activity_day")}:${values[index].diaSeleccionado}'),
                       leading: new Icon(Icons.calendar_today),
                       onTap: () {
                         //
@@ -85,19 +84,9 @@ class _ActividadesState extends State<Actividades> {
                         child: FlatButton(
                           onPressed: () {
                             deleteActividad(values[index].id);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Actividades(
-                                    auth: widget.auth,
-                                    userId: widget.userId,
-                                    diaSeleccionado: values[index].diaSeleccionado,
-                                    bl: true,
-                                  )
-                              ),
-                            );
+                            setState((){});
                           },
-                          child: Text('Eliminar'),
+                          child: Text(allTranslations.text("activity_delete")),
                           color: Colors.blue[400],
                         ),
                       )
@@ -177,7 +166,7 @@ class _AgregarActividadState extends State<AgregarActividad> {
     return Scaffold(
       floatingActionButton: aceptarButton(),
       appBar: AppBar(
-        title: Text('Agregar actividad'),
+        title: Text(allTranslations.text("activity_add")),
       ),
       body:
           Column(children: <Widget>[_entrys(), Text(test), Text('---------')]),
@@ -206,8 +195,8 @@ class _AgregarActividadState extends State<AgregarActividad> {
         keyboardType: TextInputType.text,
         autofocus: true,
         decoration: new InputDecoration(
-            labelText: 'Nombre de la actividad',
-            hintText: 'Nombre de la actividad',
+            labelText: allTranslations.text("activity_name"),
+            hintText: allTranslations.text("activity_name"),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
       ),
@@ -223,8 +212,8 @@ class _AgregarActividadState extends State<AgregarActividad> {
           keyboardType: TextInputType.text,
           autofocus: false,
           decoration: new InputDecoration(
-            labelText: 'Descripcion',
-            hintText: 'Descripcion',
+            labelText: allTranslations.text("activity_description"),
+            hintText: allTranslations.text("activity_description"),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
           ),
@@ -238,7 +227,7 @@ class _AgregarActividadState extends State<AgregarActividad> {
           child: new RaisedButton(
         color: Colors.blue,
         textColor: Colors.white,
-        child: Text('Agregar actividad'),
+        child: Text(allTranslations.text("activity_add")),
         onPressed: () {
           setState(() {
             _name = textControlerName.text;
@@ -246,14 +235,15 @@ class _AgregarActividadState extends State<AgregarActividad> {
             _userId = widget.userId;
             _diaSeleccionado = widget.diaSeleccionado.toString();
             if(widget.diaSeleccionado==null){
-              _diaSeleccionado = ' no establecido';
+              _diaSeleccionado = allTranslations.text("activity_day_not_selected");
             }
-            _icon = "hola soy un icono";
-            test = 'Enviado';
+            _icon = "Internal icon test";
+            test = allTranslations.text("message_sent");
           });
           enviaActividadBd(
             _userId, _id, _name, _icon, _description, _diaSeleccionado
           );
+          Navigator.of(context).pop();
         },
       )),
     );
